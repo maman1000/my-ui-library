@@ -8,7 +8,7 @@ Dokumentasi untuk proyek **My UI Library** berbasis React + Vite + TailwindCSS.
 
 * Komponen UI reusable (Button, Card, Input, Modal, dsb.)
 * Dibangun menggunakan **React** dan **Vite**
-* Styling dengan **TailwindCSS** yang mudah dikustomisasi
+* Styling menggunakan **CSS biasa**
 * Struktur project yang mudah diperluas
 
 ---
@@ -25,39 +25,10 @@ Jika muncul error terkait versi Node.js, update Node ke versi minimal **20.19.0*
 
 ---
 
-## 🛠️ Setup TailwindCSS
+## 🛠️ Styling
 
-Tailwind sudah diinstall dengan perintah:
-
-```bash
-npm install -D tailwindcss postcss autoprefixer
-```
-
-Inisialisasi konfigurasi:
-
-```bash
-npx tailwindcss init -p
-```
-
-Tambahkan ke `tailwind.config.js`:
-
-```js
-export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  theme: { extend: {} },
-  plugins: [],
-};
-```
-
-Tambahkan ke `src/index.css`:
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
----
+Project ini menggunakan **CSS biasa**, tidak memakai TailwindCSS.
+Tambahkan styling di file `src/index.css` atau buat file CSS per komponen.
 
 ## ▶️ Menjalankan Project
 
@@ -95,7 +66,7 @@ my-ui-library/
 │   └── index.css
 ├── public/
 ├── package.json
-├── tailwind.config.js
+├── (tidak digunakan)
 └── vite.config.js
 ```
 
@@ -106,24 +77,34 @@ my-ui-library/
 Contoh: `Button.jsx`
 
 ```jsx
-export default function Button({ children, className, ...props }) {
+// Button dengan CSS biasa
+export default function Button({ children, className = "", ...props }) {
   return (
-    <button
-      className={`px-4 py-2 rounded-lg bg-blue-600 text-white ${className}`}
-      {...props}
-    >
+    <button className={`btn ${className}`} {...props}>
       {children}
     </button>
   );
 }
 ```
 
-Lalu daftarkan ke `components/index.js`:
+jsx
+export default function Button({ children, className, ...props }) {
+return (
+<button
+className={`px-4 py-2 rounded-lg bg-blue-600 text-white ${className}`}
+{...props}
+>
+{children} </button>
+);
+}
 
+````
+
+Lalu daftarkan ke `components/index.js`:
 ```js
 import Button from "./Button";
 export { Button };
-```
+````
 
 ---
 
